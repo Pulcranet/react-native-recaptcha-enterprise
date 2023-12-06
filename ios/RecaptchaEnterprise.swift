@@ -25,11 +25,21 @@ class RecaptchaEnterprise: NSObject {
             return
         }
 
-        let actualAction = actionName.uppercased() == "LOGIN"
-            ? RecaptchaAction.init(action: .login)
-            : RecaptchaAction.init(customAction: actionName)
+        var actualAction: RecaptchaAction;
+        let actionNameUppercase = actionName.uppercased()
+        switch actionNameUppercase {
+        case "LOGIN":
+            actualAction = RecaptchaAction.init(action: .login)
+            break
+        case "SIGNUP":
+            actualAction = RecaptchaAction.init(action: .signup)
+            break
+        default:
+            actualAction = RecaptchaAction.init(customAction: actionName)
+            break
+        }
 
-        recaptchaClient.execute(actualAction!) { executeResult, error in
+        recaptchaClient.execute(actualAction) { executeResult, error in
             if let executeResult = executeResult {
                 resolve(executeResult.recaptchaToken)
             } else if let error = error {

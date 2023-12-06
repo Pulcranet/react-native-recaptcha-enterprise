@@ -89,10 +89,21 @@ public class RecaptchaEnterpriseModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void executeAction(String action, Promise promise) {
     try {
+      RecaptchaAction actionObject;
+      String actionName = action.toUpperCase();
+      switch (actionName) {
+        case "LOGIN":
+          actionObject = RecaptchaAction.LOGIN;
+          break;
+        case "SIGNUP":
+          actionObject = RecaptchaAction.SIGNUP;
+          break;
+        default:
+          actionObject = RecaptchaAction.custom(action);
+          break;
+      }
       recaptchaTasksClient
-        .executeTask(action.toUpperCase().equals("LOGIN")
-          ? RecaptchaAction.LOGIN
-          : RecaptchaAction.custom(action))
+        .executeTask(actionObject)
         .addOnSuccessListener(new OnSuccessListener<String>() {
           @Override
           public void onSuccess(String token) {
