@@ -27,4 +27,4 @@ export type RecaptchaErrorType = {
   rawData: any;
 };
 
-export type ExecuteActions = 'LOGIN' | string;
+export type ExecuteActions = 'LOGIN' | 'SIGNUP' | string;
