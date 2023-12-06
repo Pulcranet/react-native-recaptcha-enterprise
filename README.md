@@ -12,7 +12,7 @@ ___
 
 ## Installation
 - Requires React Native version 0.60.0, or later.
-- Supports iOS 14.0, or later,
+- Supports iOS 13.0, or later,
 - Supports android 23 level, or later.
 
 via NPM
